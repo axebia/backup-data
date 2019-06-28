@@ -1,0 +1,55 @@
+Question 1: Locate and explore the directories containing repository definitions.
+
+            $sudo grep -Erh ^deb /etc/apt/sources.list* 
+
+Question 2: Practice enabling and disabling epel repository in Centos system.
+
+            $sudo apt install yum-utils
+            Enable EPEL Repository -
+            $sudo yum-config-manager --enable epel
+            Disable EPEL Repository -
+            $sudo yum-config-manager --disable epel    
+
+Question 3: Use the package manager to install php7.2 and its dependencies. 
+
+            $sudo apt-get install php-fpm php-mysql
+            $php -v
+
+
+Question 4: Use the package manager to uninstall php7.2 and its dependencies.
+
+            $sudo apt-get purge 'php*'
+
+  
+Question 5: Install nodejs 10.x using source code.
+
+            $sudo apt install nodejs
+
+
+Question 6: List all available disk devices on the system .
+
+            $ lsblk
+
+Question 7: Explore disk device names and where they exists on the filesystem.
+
+            $df -a
+
+Question 8: Use the fdisk partition tool to create two partitions on your pen drive.
+            
+            https://dottheslash.wordpress.com/2011/11/29/deleting-all-partitions-on-a-usb-drive/
+            //I have followed this URL have doubts
+
+Question 9: Bash script for password validation.
+
+            #!/bin/bash
+            echo "Enter password"
+            read pwd
+            if [[  ${#pwd} -ge 8 && "$pwd" =~ [A-Z] && "$pwd" = *[a-z]* && "$pwd" = *[0-9]* ]]
+            then
+             echo "strong"
+            else
+             echo "weak"
+            fi 
+ 
+
+

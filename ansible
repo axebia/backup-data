@@ -1,0 +1,83 @@
+---
+- name: merging
+  hosts: webservers
+  tasks:
+    - include: install_apache.yml
+    - include: start_apache.yml
+...
+
+
+*******************************************************
+---
+- name: Install apache2 and start the apache2 server
+  hosts: webservers
+
+  tasks:
+    - name: Removing file
+      file:
+        path: "/var/www/html/index.html"
+        state: absent
+
+    - name: Ansible create file if it doesn't exist example
+      file:
+        path: "/var/www/html/index.html"
+        state: touch
+    - name: line insert
+      lineinfile:
+        path: "/var/www/html/index.html"
+        line: 'Added Line 1'
+    - name: port change
+      lineinfile:
+        path: "/etc/apache2/ports.conf"
+        regexp: '^Listen'
+        line: 'Listen 8080'
+      notify:
+      - restart apache2
+    - name: Install apache2
+      apt: name=apache2 state=latest
+    - name: start apache2
+      service: name=apache2 state=started
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+...
+
+********************************************************
+
+---
+- name: stat and debug
+  hosts: webservers
+  tasks:
+    - name: status checking
+      stat:
+        path: ls /etc/apache2
+      register: result
+    - name: debugging
+      debug:
+        msg: "Failure!"
+      when: result|success
+...
+
+
+
+***********************************************************
+nginx roles (install,start,static content copy)
+***********************************************************
+
+---
+- name: install
+  apt: name=nginx state=latest
+- name: start nginx
+  service: name=nginx state=started
+- name: Removing file
+  file:
+    path: "/var/www/html/index.html"
+    state: absent
+- name: File
+  copy:
+    src: index.html
+    dest: /var/www/html/
+
+
+
+***********************************************************

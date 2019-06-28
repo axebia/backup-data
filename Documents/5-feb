@@ -1,0 +1,18 @@
+Question 1. Identify where maven will expect the source code would be present.
+	    /src/main/java/sample source code is in this package
+
+	
+Question 2. Identify where maven will expect the resources would be present.
+            /src/main/resources all the resource needed to build a package
+
+	
+Question 3. Identify where maven will expect the test cases would be present.
+            /src/test/java/com/sample test case are present here.
+
+
+Question 4. Identify where maven will expect the compiled code would be present.
+	    /tar/get/classes/com/sample
+
+
+Question 5. Identify where maven will generate the artifact.
+            /target/spring3hibernateapp.war

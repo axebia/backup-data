@@ -1,0 +1,77 @@
+Question 1. du & df Command
+            du : The Linux “du” (Disk Usage) is a standard Unix/Linux command, used to check the information of disk usage of files 
+                 and directories on a machine. The du command has many parameter options that can be used to get the results in many formats.
+                 Example: $du /home/ubuntu
+                -h with du command gives result in Human readable form : $du -h /home/ubuntu
+            df : The ‘df‘ command stand for “disk filesystem“, it is used to get full summary of available and used disk space usage of 
+                 file system on Linux system.
+                 Example : $df -h
+
+
+Question 2. Check the size of any directory which is present on my system.
+            $du -h directoryname
+
+
+Question 3. Check the size of subdirectories in a directory.
+            $du -Sh directoryname
+            s : summarize display only a total for each argument
+            S : display size individually
+            h : human-readable
+
+
+Question 4. List out all the devices which is currently mounted in my system.
+            $df -h or check in /etc/mtab
+
+
+Question 5. List how much resource mounted resources are using.
+            $df -h --total
+
+
+Question 6. print 1st and 5th command line arguments
+            
+
+
+Question 7. print "INDIA" if 2nd argument equal to 10 else it will print "india"
+
+Question 8. print addition of all arguments
+
+Question 9. print the table of command line argument if value is less 10
+
+print 5 times "INDIA" if value is greater than or equal to 10
+
+Question 10. Make a script and print your name 10 times(use function to print your name)
+
+
+
+Question 11. SED and AWK command
+             SED Stands for : Stream Editor
+             SED command is used for editing files even without opening it, which is much quicker way to find and replace 
+             something in file, than first opening that file in VI Editor and then changing it.
+             $sed 's/abc/xyz/' file.txt
+             - “s” specifies the substitution operation. The “/” are delimiters. 
+                The “abc” is the search pattern and the “xyz” is the replacement string.
+             AWK: awk command searches files for text containing a pattern. When a line or text matches,
+                  awk performs a specific action on that line/text.
+                  Awk is a scripting language used for manipulating data and generating reports.
+                  The awk command programming language requires no compiling, and allows the user to use variables,
+                  numeric functions, string functions, and logical operators. 
+                  example: awk '/xyz/ {print}' file.txt 
+
+
+Question 12. write about exit status
+             Every Linux command executed by the shell script or user, has an exit status. The exit status is an integer number. 
+             The Linux man pages stats the exit statuses of each command. 0 exit status means the command was successful 
+             without any errors. A non-zero (1-255 values) exit status means command was failure.
+
+ 
+Question 13. Make a excel sheet manually with 5 column, and print the 1st,3rd and 5th column
+             $awk -F “,” ‘{print $1 $3 $5}’ /home/xeadmin/file.csv
+
+Question 14. List the sub directories of a directory which are more than 5 mb.
+             $ du -ht +5M <directory name>
+
+Question 15. List the mounted devices which are mounted in /dev
+             $ df -ah /dev
+
+
+

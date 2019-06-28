@@ -1,0 +1,11 @@
+git clone -b ashu --single-branch https://github.com/AshuRana31/gitconcepts.git
+
+// single branch cloning
+
+git log --all --decorate --online --graph
+
+// shows on which commit the head is pointed
+
+git merge branch2
+
+//from master, this will merge branch2 in master

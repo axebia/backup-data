@@ -1,0 +1,125 @@
+//to build docker image
+
+docker build -f Dockerfile -t docker-spring-boot .
+
+//running docker container
+
+docker run -p 8085:8080 docker-spring-boot
+
+// service port range : 30000-32767
+// types of service
+1.  NodePort
+2.  ClusterIP
+3.  LoadBalancer
+
+// to check in which config you are
+kubectl config current-context
+
+//to switch context
+kubectl config use-context dev
+
+//ingress
+https://www.youtube.com/watch?v=7K0gAYmWWho
+
+//accessing pods on browser
+-- https://kubernetes.io/docs/tasks/access-application-cluster/service-access-application-cluster/ --
+
+
+//creating pod
+kubectl run docker-spring-maven --image=ashurana31/springboot-docker-maven:0.0.1-SNAPSHOT --replicas=2 --labels="run=nodeport" --port=8080
+
+//creating service
+kubectl expose deployment docker-spring-maven --name=nodeport --port=8080 --type=NodePort
+
+
+//details of service
+kubectl describe services nodeport
+
+
+//cluster info
+kubectl cluster-info
+
+//creatiing ingress-resource - ingress controller should be ennabled on minikube
+kubectl apply -f ingress-resource.yaml
+
+[minikube addons list
+ minikube addons enable ingress
+ kubectl get pods -n kube-system] 
+// nginx ingress container should be running
+
+//see ingress created
+kubectl get ingress
+
+//registering into /etc/hosts
+echo "$(minikube ip) spring-docker-maven.com" | sudo tee -a /etc/hosts
+
+
+go and check on custum host on the browser.
+
+
+//installing helm and tiller
+
+1. cd /tmp
+2. curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > install-helm.sh
+3. chmod u+x install-helm.sh
+4. ./install-helm.sh
+//installing tiller on cluster
+1. kubectl -n kube-system create serviceaccount tiller
+2. kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+3. helm init --service-account tiller
+
+//ci-cd kubernetes
+https://github.com/eldada/jenkins-pipeline-kubernetes
+
+
+
+
+stage('Deploying to Kubernetes') {
+            steps {
+                kubernetesDeploy configs: 'deployment.yaml,service.yaml,ingress.yaml', dockerCredentials: [[credentialsId: 'dockerhub']], kubeConfig: [path: ''], kubeconfigId: 'kubeconfigfile', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            }
+        }
+        stage('testing kubectl') {
+            steps {
+               sh label: '', script: 'helm install springboot-helm-chart'
+            }
+        }
+        
+    }
+}
+
+
+
+FROM openjdk:8
+ADD build/docker/gradle-1.jar gradle-1.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "gradle-1.jar"]
+
+dockerfile = file('dockerfile') 
+def myCopySpec = project.copySpec{
+        from('build/libs') {
+            into 'build/docker'
+        }
+        from('.') {
+            include 'gradle-1.jar'
+        }
+}
+}
+
+//gradle task to copy jar from /build/libs to /build/docker
+task copyJarToBin {
+    copy {
+        from 'build/libs/gradle.jar'
+        into "/home/xeadmin/gs-spring-boot/complete/build/docker"
+    }
+}
+
+
+
+
+
+
+
+
+
+

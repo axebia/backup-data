@@ -1,0 +1,44 @@
+Question 1: List top 10 lines of **/var/log/auth.log**
+
+
+            head  -10 var/log/auth.log 
+
+Question 2: List last 10 lines of **/var/log/auth.log**
+
+            tail -10 /var/log/auth.log     
+
+Question 3: Keep on listing new content appended to **/var/log/auth.log** 
+
+            tail -f /var/log/auth.log 
+
+
+Question 4: List the content of **/var/log/auth.log** from line number 10 till 20
+
+            sed -n ‘10,20p’ /var/log/auth.log 
+  
+Question 5: Setup two machine and perform ssh between them by password method and ssh-key method.
+
+            Password Less login:
+            do ssh-keygen on machine one and paste its public key in /.ssh/authorized_keys. And do ssh  user@ip
+            Password login:
+            do ssh username@ip
+            it will ask for password, type the password and its done.
+
+
+Question 6: Use verbose mode with ssh and summrize your understanding
+
+            Ssh -v username@ip
+            it will be in debugging mode. 
+
+Question 7: Change the default port of ssh.
+
+            Go to /etc/ssh/sshd_config
+            and change port 22 to the port number of your choice.
+
+Question 8: Copy a text file from server to another user by scp
+            
+            scp username@remoteIP:file.txt /home/Ashu
+
+ 
+
+

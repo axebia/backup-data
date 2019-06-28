@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: spring-docker-maven
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: spring-docker-maven.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nodeport
+          servicePort: 8080
+---
+
+

@@ -1,0 +1,7 @@
+    1. clean: deletes all artifacts and targets which are created already.
+
+       
+    2. compile: used to compile the source code of the project.
+    3. test: test the compiled code and these tests do not require to be packaged or deployed.
+    4. package: package is used to convert your project into a jar or war etc.
+    5. install: install the package into the local repository for use of another project.
